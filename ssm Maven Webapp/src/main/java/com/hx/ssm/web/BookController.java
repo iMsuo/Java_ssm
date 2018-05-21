@@ -29,9 +29,10 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 	
-	@RequestMapping(value="list",method=RequestMethod.GET)
+	@RequestMapping(value="/list",method=RequestMethod.GET)
 	private String list(Model model)
 	{
+		System.out.println("123");
 		List<Book> list=bookService.getBooks();
 		model.addAttribute("list",list);
 		return "list";// WEB-INF/jsp/"list".jsp
@@ -57,7 +58,9 @@ public class BookController {
 				"application/json; charset=utf-8" })
 		@ResponseBody
 		private Result<AppointExecution> appoint(@PathVariable("bookId") Long bookId, @RequestParam("studentId") Long studentId) {
+			System.out.println("111");
 			if (studentId == null || studentId.equals("")) {
+				System.out.println("111");
 				return new Result<AppointExecution>(false, "学号不能为空");
 			}
 			//AppointExecution execution = bookService.appoint(bookId, studentId);//错误写法，不能统一返回，要处理异常（失败）情况
